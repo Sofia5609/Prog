@@ -23,9 +23,22 @@ class Help {
 				System.out.println(" ... ");
 				System.out.println("} ");
 				break;
-			default:
-				System.out.println("Неверный выбор раздела");
-				
+			case '3':
+                                System.out.println("Цикл for: \n");
+                                System.out.println("for (инициализация; условие; итерация)");
+                                System.out.println("  оператор;");
+				break;
+			case '4':
+                                System.out.println("Цикл while: \n");
+                                System.out.println("while (условие) оператор;");
+				break;
+			case '5':
+                                System.out.println("Цикл do-while: \n");
+                                System.out.println("do {");
+                                System.out.println("  оператор;");
+                                System.out.println("} while (условие);");
+				break;
 		}
 	}
 }
+
