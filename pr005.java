@@ -31,9 +31,9 @@ class Arrays {
 		System.out.println("Минимальное и максимальное значение: " + min + " " + max);
 
 		//Инициальзация массива
-		 System.out.println();
-		 int[] sample2 = {87, 100, -42, 34, 25, -25, -424, 62, 74, 8};
-		 min = max = sample2[0];
+		System.out.println();
+	 	int[] sample2 = {87, 100, -42, 34, 25, -25, -424, 62, 74, 8};
+		min = max = sample2[0];
                 for (i = 1; i < 10; i++) {
                         if (sample2[i] < min) min = sample2[i];
                         if (sample2[i] > max) max = sample2[i];
@@ -45,7 +45,7 @@ class Arrays {
 		int size = sample2.length;
 		int a, b, t;
 		//Отображение исходного массива
-		System.out.println("Исходный массив:");
+		System.out.print("Исходный массив:");
 		for(i=0; i <  size; i++)
 			System.out.println(" " + sample2[i]);
 		System.out.println();
@@ -60,7 +60,7 @@ class Arrays {
 				}
 			}
 		//Отображение отсортированного массива 
-		System.out.println("Отсортированный массив:");
+		System.out.print("Отсортированный массив:");
 		for(i=0; i < size; i++)
 			System.out.println(" " + sample2[i]);
                 System.out.println();
@@ -72,9 +72,9 @@ class Arrays {
 		       for(i2=10; i2<30; i2++) {	
 			       arr2D[t2][i2-10] = (t2*100)+i2+1;
 				if (t2==0)
-			       		System.out.println(arr2D[t2][i2-10] + " ");
+			       		System.out.print(arr2D[t2][i2-10] + " ");
 				else
-					System.out.println(arr2D[t2][i2-10] + " ");
+					System.out.print(arr2D[t2][i2-10] + " ");
 			}
 			System.out.println();
 		}
@@ -91,22 +91,23 @@ class Arrays {
 		riders[5] = new int[2];
                 riders[6] = new int[2];
 
-		for(int i3=0; i3<5; i3++)
+		for(int i3=0; i3<7; i3++)
 			for(int j3=0; j3<riders[i3]. length; j3++)
 				riders[i3][j3] = i3 + j3 + 10;
 		
 		System.out.println("Количество пассажиров в рабочие дни недели: ");
-		for(int i3=0; i3<5; i3++)
-                        for(int j3=0; j3<riders[i3]. length; j3++) {
+		for(int i3=0; i3<5; i3++) {
+                        for(int j3=0; j3<riders[i3]. length; j3++) 
 				System.out.print(riders[i3][j3] + " ");
 			System.out.println();
 		}
 
 		System.out.println();
 		System.out.println("Количество пассажиров в выходные дни: ");
-                for(int i3=5; i3<7; i3++)
+                for(int i3=5; i3<7; i3++){
                         for(int j3=0; j3<2; j3++) 
                                 System.out.print(riders[i3][j3] + " ");
                         System.out.println();
                 }
 	}
+}
