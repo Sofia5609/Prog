@@ -304,7 +304,7 @@ class Arrays {
 				1
 				2
 				3
-				""");
+				""")i;
 		System.out.println("Программе передано " + args.length + " аргументов");
 		System.out.println("Список аргументов: ");
 		for (String s : args)
