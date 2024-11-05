@@ -124,7 +124,72 @@ class ErrorInfo {
 			return new Err("Отсутствует код для ошибки", 0);
 	}
 }
+//Перегрузка методов
+class Overload {
+	void ovlDemo() {
+		System.out.println("Без параметров");
+	}
+	void ovlDemo(int a15) {
+		System.out.println("Один параметр типа int: " + a15);
+	}
+	int ovlDemo(int a15, int b15) {
+		System.out.println("Два параметра типа int: " + a15 + " " + b15);
+		return a15+b15;
+	}
+	double ovlDemo(double a15, double b15) {
+		System.out.println("Два параметра типа double: " + a15 + " " + b15);
+		return a15-b15;
+	}
+}
+//Влияние автопреобразования типов на перегрузку методов
+class Overload2 {
+        void f(int x) {
+		System.out.println("Внутри f(int x): " + x);
+	}
+	void f(double x) {
+ 		System.out.println("Внутри f(double x): " + x);	
+	}
+	void f(byte x) {
+		System.out.println("Внутри f(byte x): " + x);
+	}
+}
+//Перегрузка конструкторов
+class Overload3 {
+	int x;
 
+	Overload3() {
+		System.out.println("Внутри Overload3()");
+		x = 0;
+	}
+
+	Overload3(int i19) {
+		System.out.println("Внутри Overload3(int)");
+		x = i19;
+	}
+
+	Overload3(double d19) {
+		System.out.println("Внутри Overload3(double)");
+		x = (int) d19;
+	}
+
+	Overload3(int i19, int j19) {
+		System.out.println("Внутри Overload3(int, int)");
+		x = i19*j19;
+	}
+}
+//Создание новогго объекта на основе другого объекта
+class Summation {
+	int sum;
+
+	Summation(int num) {
+		sum = 0;
+		for(int i20=1; i20 <= num; i20++)
+			sum += i20;
+	}
+	Summation(Summation ob) {
+		sum = ob.sum;
+	}
+}
 class pr007 {
 	public static void main(String[] args) {
 		Mod ob = new Mod();
@@ -211,7 +276,55 @@ class pr007 {
 		System.out.println(e.msg + ", уровень серьёзности: " + e.severity);
 		e = err2.getErrorInfo(20);
                 System.out.println(e.msg + ", уровень серьёзности: " + e.severity);
+		
+		//Демонстрация перезагрузки методов (overload)
+		Overload ob7 = new Overload();
+		int resI;
+		double resD;
 
+		ob7.ovlDemo();
+		System.out.println();
+		ob7.ovlDemo(2);
+		System.out.println();
+		resI = ob7.ovlDemo(4, 6);
+		System.out.println("Результат вызова ob7.ovlDemo(4, 6): " + resI);
+		System.out.println();
+		resD = ob7.ovlDemo(5.1, 3.5);
+		System.out.println("Результат вызова ob7.ovlDemo(5.1, 3.5): " + resD);
+		System.out.println();
+
+		//Перегрузка с автопреобразованием типов
+		Overload2 ob8 = new Overload2();
+		int i18=10;
+		double d18 = 10.1;
+		byte b18 = 99;
+		short s18 = 10;
+		float f18 = 11.5F;
+		ob8.f(i18);
+		ob8.f(d18);
+		ob8.f(b18);
+		ob8.f(s18);
+		ob8.f(f18);
+		
+		System.out.println();
+		//Перегрузка конструкторов у класса Overload3
+		Overload3 t1 = new Overload3();
+		Overload3 t2 = new Overload3(88);
+		Overload3 t3 = new Overload3(17.23);
+		Overload3 t4 = new Overload3(2, 4);
+		
+		System.out.println("t1.x: " + t1.x);
+		System.out.println("t2.x: " + t2.x);
+		System.out.println("t3.x: " + t3.x);
+		System.out.println("t4.x: " + t4.x);
+
+		System.out.println();
+                //Демонстрация перегрузка конструктора для создания объекта на основе другого объекта
+		Summation s1 = new Summation(5);
+		Summation s2 = new Summation(s1);
+
+		System.out.println("s1.sum: " + s1.sum);
+		System.out.println("s2.sum: " + s2.sum);
  	}
 	
 }
