@@ -2,6 +2,7 @@
 class TwoDShape {
 	private double width;
 	private double height;
+	int common;
 	//Конструктор без параметров
 	TwoDShape() {
 		width = height = 0.0;
