@@ -2,6 +2,20 @@
 class TwoDShape {
 	private double width;
 	private double height;
+	//Конструктор без параметров
+	TwoDShape() {
+		width = height = 0.0;
+	}
+	//Конструктор с двумя параметрами
+	TwoDShape(double w, double h) {
+		width = w;
+		height = h;
+	}
+	//Конструктор объекта с одинаковыми высотой и шириной
+TwoDShape(double x) {
+		width = height = x;
+	}	
+
 	void showDim() {
 		System.out.println("Ширина и высота: " + width + " и " + height);
 	}
@@ -25,13 +39,22 @@ class TwoDShape {
 class Triangle extends TwoDShape {
 	String style;
 
-	//Конструктор
+	//Конструктор по умолчанию
+	Triangle() {
+		super();
+		style = "отсутствует";
+	}
+	//Конструктор с тремя параметрами
 	Triangle (String s, double  w, double  h) {
+		//Вызов конструктора суперкласса 
+		super(w, h);
 		//Установка значения для переменной подкласса
 		style = s;
-		//Установка значений для переменных суперкласса
-		setWidth(w);
-		setHeight(h);
+	}
+	//Конструктор с одним параметром
+	Triangle(double x) {
+		super(x);
+		style = "закрашенный";
 	}
 
 	double area() {
@@ -44,14 +67,23 @@ class Triangle extends TwoDShape {
 class Rectangle extends TwoDShape {
 	String outline;
 
-	//Конструктор
+	//Конструкторы
+	Rectangle() {
+		super();
+		outline = "отсутствует";
+	}
+
         Rectangle (String o, double  w, double  h) {
+		//Вызов конструктора суперкласса
+		super(w, h);
                 //Установка значения для переменной подкласса
                 outline = o;
-                //Установка значений для переменных суперкласса
-                setWidth(w);
-                setHeight(h);
         }
+
+	Rectangle(double x) {
+		super(x);
+		outline = "сплошная";
+	}
 
 	double area() {
 		return getWidth()*getHeight();
@@ -66,10 +98,11 @@ class Rectangle extends TwoDShape {
 }
 class pr009 {
 	public static void main(String[] args) {
-		Triangle t1 = new Triangle("закрашенный", 4.0, 4.0);
+		Triangle t1 = new Triangle();
 		Triangle t2 = new Triangle("контурный", 8.0, 12.0);
+		Triangle t3 = new Triangle(4.0);
 		Rectangle r1 = new Rectangle("сплошная", 4.0, 4.0);
-		Rectangle r2 = new Rectangle("пунктирная", 8.0,12.0);
+		Rectangle r2 = new Rectangle(5.0);
 /*
 		t1.setWidth(4.0);
 		t1.setHeight(4.0);
@@ -84,6 +117,8 @@ class pr009 {
                 r2.setHeight(12.0);
                 r2.outline = "пунктирная";
 */
+		t1 = t2;
+
 		System.out.println("Информация об объекте t1: ");
 		t1.showStyle();
 		t1.showDim();
@@ -94,6 +129,13 @@ class pr009 {
 		t2.showDim();
 		System.out.println("Площадь: " + t2.area());
 		System.out.println();
+
+		System.out.println("Информация об объекте t3: ");
+                t2.showStyle();
+                t2.showDim();
+                System.out.println("Площадь: " + t3.area());
+                System.out.println();
+
 		System.out.println("Информация об объекте r1: ");
 		r1.showOutline();
 		r1.showDim();
