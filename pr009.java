@@ -1,5 +1,5 @@
 //Основы наследования 
-class TwoDShape {
+abstract class TwoDShape {
 	private double width;
 	private double height;
 	private String name;
@@ -17,7 +17,7 @@ class TwoDShape {
 		System.out.println("Внутри конструктора TwoDShape(double w, double h)");
 	}
 	//Конструктор объекта с одинаковыми высотой и шириной
-TwoDShape(double x, String n) {
+	TwoDShape(double x, String n) {
 		width = height = x;
 		name = n;
 	}	
@@ -47,10 +47,8 @@ TwoDShape(double x, String n) {
                         width = 290;
                 else height = h;
         }
-	double area() { 
-		System.out.println("Метод area() должен быть переопределён в подклассе");
-		return 0.0;
-	}
+	abstract double area(); 
+	
 	String getName() {
 		return name;
 	}
@@ -93,20 +91,20 @@ class Triangle extends TwoDShape {
                 System.out.println("Стиль: " + style);
         }
 
-/*
-	//Конструктор для создания прямоугольника из существующего объекта
+
+/*	//Конструктор для создания прямоугольника из существующего объекта
 	Rectangle(int a, int b) {
 		super(ob);
 		outline = ob.outline;
 	}
-
+*/
 	double area() {
 		return getWidth()*getHeight()/2;
 	}
-	void showStyle() {
+/*	void showStyle() {
 		System.out.println("Стиль: " + style);
 	}
-	*/
+*/	
 }
 
 //Демонстрация строгой типизации при присваивании ссылок на объект
@@ -166,6 +164,9 @@ class ColorTriangle extends Triangle {
 	void showColor() {
 		System.out.println("цвет: " + color);
 	}
+	public String toString() {
+		return "Описывает цветной треугольник, его стилоь, вычисляет площадь";
+	}
 }
 class Rectangle extends TwoDShape {
 	String outline;
@@ -200,9 +201,45 @@ class Rectangle extends TwoDShape {
                 System.out.println("Рамка: " +  outline);
         }
 }
-
+//Заппрещение переопределения метода в подклассе
+class A {
+	final void meth() {
+		System.out.println("Финальная версия метода meth");
+	}
+}
+class B extends A {
+	/*
+	void meth() {
+		System.out.println("Ошибочная попытка переопределения метода с модификатором final");
+	}
+	*/
+}
+//Использование final для определения констант 
+class ErrorMsg {
+	//коды ошибок 
+	final int OUTERR = 0;
+	final int INERR = 1;
+	final int DISKERR = 2;
+	final int INDEXERR = 3;
+	String[] msgs = {
+		"Ошибка вывода",
+		"Ошибка ввода",
+		"Диск пенреполнен",
+		"Индекс вышел за границы массива"
+		};
+		//Возврат сообщения об ошибке
+		String getErrorMsg(int i) {
+			if(i >= 0 & i < msgs.length)
+				return msgs[i];
+			else
+				return "Несуществующий код ошибки";
+	}
+}
 class pr009 {
 	public static void main(String[] args) {
+
+// 		ErrorMsg err = new ErrorMsg();
+// 		Демонстрация применения статических переменных с модификатором final
 		Triangle t1 = new Triangle();
 		Triangle t2 = new Triangle("контурный", 8.0, 12.0);
 		Triangle t3 = new Triangle(4.0);
@@ -320,14 +357,33 @@ class pr009 {
 		shapes[1] = new Rectangle(10);
 		shapes[2] = new Rectangle("сплошная", 10,4);
 		shapes[3] = new Triangle(7.0);
-		shapes[4] = new TwoDShape(10, 20, "aбстрактная фигура");
+		//shapes[4] = new TwoDShape(10, 20, "aбстрактная фигура");
 
 		System.out.println();
-
-		for(int i=0; i<shapes.length; i++) {
+                
+		for(int i=0; i<(shapes.length-1); i++) {
 			System.out.println("Имя объекта: " + shapes[i]. getName());
 			System.out.println("Площадь: " + shapes[i].area());
-			System.out.println();
+			System.out.println(); 
 		}
+
+		Object obj;
+		obj = shapes[3];
+		System.out.println("Класс объекта: " + obj.getClass() + "\nОписание: " +  obj.toString());
+		System.out.println("obj и shapes[3] равны друг другу: " + shapes[3].equals(obj));
+		System.out.println("Хеш-код объекта: " + obj.hashCode());
+		ColorTriangle t10 = new ColorTriangle("Строка 1", "Строка 2",10,10);
+		obj = t10;
+		System.out.println("Класс объекта: " + obj.getClass() + "\nОписание: " + obj.toString());
+		System.out.println("obj и shapes[3] равны друг другу: " + shapes[3].equals(obj));
+                System.out.println("Хеш-код объекта: " + obj.hashCode());
+		Triangle t11 = new Triangle("контурный", 8.0, 10.0);
+		Triangle t12 = new Triangle(t11);
+		System.out.println("t12 и t11  равны друг другу: " + t11.equals(t12));
+		System.out.println("Хеш-код объекта t11: " + t11.hashCode());
+                System.out.println("Хеш-код объекта t12: " + t12.hashCode());
+
+
+
 	}
 }	
